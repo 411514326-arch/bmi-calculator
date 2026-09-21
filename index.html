@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator & Health Tracker</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo">
+        <span class="logo-icon">⚖️</span>
+        <h1>BMI Calculator</h1>
+      </div>
+      <p class="subtitle">Calculate your Body Mass Index and find your healthy weight range</p>
+    </header>
+
+    <main class="calculator-card">
+      <!-- Unit Selector Tabs -->
+      <div class="unit-tabs">
+        <button type="button" class="tab-btn active" id="metricTab">Metric (cm / kg)</button>
+        <button type="button" class="tab-btn" id="imperialTab">Imperial (ft·in / lbs)</button>
+      </div>
+
+      <form id="bmiForm" autocomplete="off">
+        <!-- Metric Inputs -->
+        <div class="input-group-container" id="metricInputs">
+          <div class="form-group">
+            <div class="label-row">
+              <label for="heightCm">Height</label>
+              <span class="unit-badge">cm</span>
+            </div>
+            <div class="input-wrapper">
+              <input type="number" id="heightCm" min="50" max="250" placeholder="175" value="175" step="0.5" required>
+            </div>
+            <input type="range" id="heightCmSlider" min="100" max="220" value="175" class="slider">
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="weightKg">Weight</label>
+              <span class="unit-badge">kg</span>
+            </div>
+            <div class="input-wrapper">
+              <input type="number" id="weightKg" min="20" max="300" placeholder="70" value="70" step="0.1" required>
+            </div>
+            <input type="range" id="weightKgSlider" min="30" max="150" value="70" class="slider">
+          </div>
+        </div>
+
+        <!-- Imperial Inputs (Hidden by default) -->
+        <div class="input-group-container hidden" id="imperialInputs">
+          <div class="form-group">
+            <div class="label-row">
+              <label>Height</label>
+              <span class="unit-badge">ft & in</span>
+            </div>
+            <div class="multi-input">
+              <div class="input-wrapper">
+                <input type="number" id="heightFt" min="2" max="8" placeholder="5" value="5">
+                <span class="input-unit">ft</span>
+              </div>
+              <div class="input-wrapper">
+                <input type="number" id="heightIn" min="0" max="11" placeholder="9" value="9">
+                <span class="input-unit">in</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="label-row">
+              <label for="weightLbs">Weight</label>
+              <span class="unit-badge">lbs</span>
+            </div>
+            <div class="input-wrapper">
+              <input type="number" id="weightLbs" min="40" max="660" placeholder="154" value="154" step="0.5">
+            </div>
+            <input type="range" id="weightLbsSlider" min="60" max="350" value="154" class="slider">
+          </div>
+        </div>
+
+        <!-- Age & Gender (Optional contextual info) -->
+        <div class="demographics-grid">
+          <div class="form-group-small">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="10" max="120" placeholder="25" value="25">
+          </div>
+          <div class="form-group-small">
+            <label for="gender">Gender</label>
+            <select id="gender">
+              <option value="unspecified">Select (Optional)</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="calculate-btn" id="calcBtn">
+          <span>Calculate BMI</span>
+          <span class="btn-arrow">→</span>
+        </button>
+      </form>
+
+      <!-- Results Section -->
+      <section class="result-section hidden" id="resultSection" aria-live="polite">
+        <div class="divider"></div>
+        
+        <div class="result-header">
+          <span class="result-tag">Your Result</span>
+          <div class="bmi-display">
+            <span class="bmi-number" id="bmiValue">22.9</span>
+            <span class="bmi-unit">BMI</span>
+          </div>
+          <div class="category-badge" id="categoryBadge">Normal Weight</div>
+        </div>
+
+        <!-- Visual BMI Gauge -->
+        <div class="gauge-container">
+          <div class="gauge-bar">
+            <div class="gauge-segment underweight" title="Underweight (< 18.5)"></div>
+            <div class="gauge-segment normal" title="Normal (18.5 - 24.9)"></div>
+            <div class="gauge-segment overweight" title="Overweight (25 - 29.9)"></div>
+            <div class="gauge-segment obese" title="Obese (≥ 30)"></div>
+          </div>
+          <div class="gauge-pointer" id="gaugePointer" style="left: 45%;">
+            <div class="pointer-arrow">▲</div>
+          </div>
+          <div class="gauge-labels">
+            <span>16</span>
+            <span>18.5</span>
+            <span>25</span>
+            <span>30</span>
+            <span>40</span>
+          </div>
+        </div>
+
+        <!-- Health Metrics Cards -->
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <span class="metric-icon">🎯</span>
+            <div class="metric-info">
+              <span class="metric-label">Healthy Weight Range</span>
+              <strong class="metric-value" id="healthyRange">56.7 - 76.3 kg</strong>
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <span class="metric-icon">📊</span>
+            <div class="metric-info">
+              <span class="metric-label">Weight Difference</span>
+              <strong class="metric-value" id="weightDiff">Optimal Range</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suggestions and Advice -->
+        <div class="advice-box" id="adviceBox">
+          <p id="adviceText">Your BMI is in the healthy weight category. Maintain balanced nutrition and regular physical activity to sustain overall wellness.</p>
+        </div>
+      </section>
+    </main>
+
+    <!-- Reference Scale -->
+    <footer class="reference-card">
+      <h3>World Health Organization (WHO) BMI Scale</h3>
+      <div class="reference-table">
+        <div class="ref-row">
+          <span class="ref-dot underweight"></span>
+          <span class="ref-cat">Underweight</span>
+          <span class="ref-range">&lt; 18.5</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-dot normal"></span>
+          <span class="ref-cat">Normal weight</span>
+          <span class="ref-range">18.5 – 24.9</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-dot overweight"></span>
+          <span class="ref-cat">Overweight</span>
+          <span class="ref-range">25.0 – 29.9</span>
+        </div>
+        <div class="ref-row">
+          <span class="ref-dot obese"></span>
+          <span class="ref-cat">Obesity</span>
+          <span class="ref-range">&ge; 30.0</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
