@@ -113,7 +113,7 @@
 
         <button type="submit" class="calculate-btn" id="calcBtn">
           <span>Calculate BMI</span>
-          <span class="btn-arrow">??/span>
+          <span class="btn-arrow">&rarr;</span>
         </button>
       </form>
 
@@ -136,10 +136,10 @@
             <div class="gauge-segment underweight" title="Underweight (< 18.5)"></div>
             <div class="gauge-segment normal" title="Normal (18.5 - 24.9)"></div>
             <div class="gauge-segment overweight" title="Overweight (25 - 29.9)"></div>
-            <div class="gauge-segment obese" title="Obese (??30)"></div>
+            <div class="gauge-segment obese" title="Obese (30 or higher)"></div>
           </div>
           <div class="gauge-pointer" id="gaugePointer" style="left: 45%;">
-            <div class="pointer-arrow">??/div>
+            <div class="pointer-arrow">&#9660;</div>
           </div>
           <div class="gauge-labels">
             <span>16</span>
@@ -161,7 +161,7 @@
           </div>
 
           <div class="metric-card">
-            <span class="metric-icon">??</span>
+            <span class="metric-icon" aria-hidden="true">&#10003;</span>
             <div class="metric-info">
               <span class="metric-label">Weight Difference</span>
               <strong class="metric-value" id="weightDiff">Optimal Range</strong>
@@ -188,12 +188,12 @@
         <div class="ref-row">
           <span class="ref-dot normal"></span>
           <span class="ref-cat">Normal weight</span>
-          <span class="ref-range">18.5 ??24.9</span>
+          <span class="ref-range">18.5 - 24.9</span>
         </div>
         <div class="ref-row">
           <span class="ref-dot overweight"></span>
           <span class="ref-cat">Overweight</span>
-          <span class="ref-range">25.0 ??29.9</span>
+          <span class="ref-range">25.0 - 29.9</span>
         </div>
         <div class="ref-row">
           <span class="ref-dot obese"></span>
