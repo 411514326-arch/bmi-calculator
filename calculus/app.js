@@ -600,9 +600,9 @@
 
     setMetrics([
       { label: 'Target c', val: c.toFixed(2) },
-      { label: 'Left Limit L??, val: isNaN(analysis.leftLimit) ? 'None' : analysis.leftLimit.toFixed(3) },
-      { label: 'Right Limit L??, val: isNaN(analysis.rightLimit) ? 'None' : analysis.rightLimit.toFixed(3) },
-      { label: 'Calculated 帤', val: analysis.delta.toFixed(3) }
+      { label: 'Left limit', val: isNaN(analysis.leftLimit) ? 'None' : analysis.leftLimit.toFixed(3) },
+      { label: 'Right limit', val: isNaN(analysis.rightLimit) ? 'None' : analysis.rightLimit.toFixed(3) },
+      { label: 'Delta', val: analysis.delta.toFixed(3) }
     ]);
   }
 
