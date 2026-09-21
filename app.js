@@ -158,7 +158,7 @@
     if (isImperial) {
       const minHealthyLbs = (minHealthyKg * 2.20462).toFixed(1);
       const maxHealthyLbs = (maxHealthyKg * 2.20462).toFixed(1);
-      healthyRangeEl.textContent = `${minHealthyLbs} ??${maxHealthyLbs} lbs`;
+      healthyRangeEl.textContent = `${minHealthyLbs} to${maxHealthyLbs} lbs`;
 
       const currentLbs = parseFloat(weightLbsInput.value);
       if (currentLbs < minHealthyLbs) {
@@ -168,10 +168,10 @@
         const diff = (currentLbs - maxHealthyLbs).toFixed(1);
         weightDiffEl.textContent = `-${diff} lbs to normal`;
       } else {
-        weightDiffEl.textContent = 'Optimal Range ??;
+        weightDiffEl.textContent = 'Within the healthy range';
       }
     } else {
-      healthyRangeEl.textContent = `${minHealthyKg.toFixed(1)} ??${maxHealthyKg.toFixed(1)} kg`;
+      healthyRangeEl.textContent = `${minHealthyKg.toFixed(1)} to${maxHealthyKg.toFixed(1)} kg`;
 
       if (weightKg < minHealthyKg) {
         const diff = (minHealthyKg - weightKg).toFixed(1);
@@ -180,7 +180,7 @@
         const diff = (weightKg - maxHealthyKg).toFixed(1);
         weightDiffEl.textContent = `-${diff} kg to normal`;
       } else {
-        weightDiffEl.textContent = 'Optimal Range ??;
+        weightDiffEl.textContent = 'Within the healthy range';
       }
     }
   }
